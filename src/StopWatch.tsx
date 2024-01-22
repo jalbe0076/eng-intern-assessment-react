@@ -1,7 +1,12 @@
 import React from 'react'
 
-export default function StopWatch() {
+interface StopWatchProps {
+    elapsedTime: number;
+    formatTime: (arg: number) => string
+}
+
+export default function StopWatch({ elapsedTime, formatTime }: StopWatchProps) {
     return(
-        <div></div>
+        <p>{formatTime(elapsedTime)}</p>
     )
 }
