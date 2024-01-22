@@ -30,12 +30,21 @@ export default function App() {
         };
     }, [isRunning, elapsedTime]);
 
-    const toggleTimmer = ():void => {
+    const toggleTimmer = (): void => {
         setIsRunning(!isRunning);
     }
 
     const lapResetAction = (): void => {
+        if(isRunning) {
 
+        } else {
+            resetStopWatch();
+        }
+    }
+
+    const resetStopWatch = (): void => {
+        setElapsedTime(0)
+        startTimeRef.current = 0;
     }
 
     const formatTime = (time: number): string => {
