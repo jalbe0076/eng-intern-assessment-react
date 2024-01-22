@@ -7,6 +7,6 @@ interface StopWatchButtonProps {
 
 export default function StopWatchButton({ label, onClick }: StopWatchButtonProps) {
     return(
-        <button onClick={onClick}>{label}</button>
+        <button className={label} onClick={onClick}>{label}</button>
     )
 }

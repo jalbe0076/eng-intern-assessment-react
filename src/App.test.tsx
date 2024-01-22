@@ -66,9 +66,9 @@ describe('Stopwatch App', () => {
 
     // Get and check laps
     const currentLapTime = screen.getByText(/Current Lap:/i);
-    const lapTime1 = screen.getByText(/Lap 1: 00:00.10/i);
+    const lap1Tag = screen.getByText(/Lap 1:/i);
     expect(currentLapTime).toBeInTheDocument();
-    expect(lapTime1).toBeInTheDocument();
+    expect(lap1Tag).toBeInTheDocument();
     expect(timeElement).toHaveTextContent('00:00.10');
 
     act(() => {
@@ -79,8 +79,8 @@ describe('Stopwatch App', () => {
     fireEvent.click(lapResetButton);
     
     // Get and check additional laps
-    const lapTime2 = screen.getByText(/Lap 2: 00:00.20/i);
-    expect(lapTime2).toBeInTheDocument();
+    const lap2Tag = screen.getByText(/Lap 2:/i);
+    expect(lap2Tag).toBeInTheDocument();
     expect(timeElement).toHaveTextContent('00:00.30');
     
     // Trigger stop and reset button click
@@ -91,7 +91,7 @@ describe('Stopwatch App', () => {
     // Confirm reset render
     expect(timeElement).toHaveTextContent('00:00.00');
     expect(currentLapTime).not.toBeInTheDocument();
-    expect(lapTime1).not.toBeInTheDocument();
-    expect(lapTime2).not.toBeInTheDocument();
+    expect(lap1Tag).not.toBeInTheDocument();
+    expect(lap2Tag).not.toBeInTheDocument();
   });
 });

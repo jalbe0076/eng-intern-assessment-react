@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef } from 'react';
 import StopWatchButton from './StopWatchButton';
 import StopWatch from './StopWatch';
+import './App.css';
 
 export default function App() {
     const [isRunning, setIsRunning] = useState<boolean>(false);
@@ -81,17 +82,19 @@ export default function App() {
             </header>
 
             <section>
-                <StopWatch elapsedTime={elapsedTime} formatTime={formatTime} />
-                <StopWatchButton onClick={toggleTimmer} label={isRunning ? 'Stop' : 'Start'} />
-                <StopWatchButton onClick={lapResetAction} label={isRunning ? 'Lap' : 'Reset'} />
+                <StopWatch label='main-timer' elapsedTime={elapsedTime} formatTime={formatTime} />
+                <div className='btn-container'>
+                    <StopWatchButton onClick={toggleTimmer} label={isRunning ? 'Stop' : 'Start'} />
+                    <StopWatchButton onClick={lapResetAction} label={isRunning ? 'Lap' : 'Reset'} />
+                </div>
             </section>
 
             {savedLaps.length > 0 && (
                 <section>
                     <ul>
-                        <li className='lap-list'><span>Current Lap: </span><StopWatch elapsedTime={lapTimer} formatTime={formatTime} /></li>
+                        <li className='lap-list'><span>Current Lap: </span><StopWatch label='lap-timer' elapsedTime={lapTimer} formatTime={formatTime} /></li>
                         {savedLaps.map((lapTime, index) => {
-                            return <li key={index}>{`Lap ${savedLaps.length - index}: ${formatTime(lapTime)}`}</li>
+                            return <li className='lap-list' key={index}><span>{`Lap ${savedLaps.length - index}:`}</span><span>{formatTime(lapTime)}</span></li>
                         })}
                     </ul>
                 </section>

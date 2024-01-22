@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family:  Helvetica, Arial, sans-serif;
+  color: white;
+  list-style-type: none;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: black;
+}
+
+h1 {
+  font-size: 2.4rem;
+}
+
+body {
+  width: 280px;
+  line-height: 1.5;
+}
+
+button {
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  background-color: rgb(168, 185, 199);
+  color: black;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
+
+.Start {
+  background-color: rgb(27, 90, 27);
+  color: rgb(67, 240, 73);
+}
+
+.Stop {
+  background-color: rgb(110, 27, 27);
+  color: rgb(255, 85, 85);
+}
+
+.lap-list {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.1rem;
+}
+
+.main-timer {
+  font-size: 3rem;
+}
