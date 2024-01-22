@@ -6,7 +6,7 @@ import StopWatch from './StopWatch';
 export default function App() {
     const [isRunning, setIsRunning] = useState<boolean>(false);
     const [elapsedTime, setElapsedTime] = useState<number>(0);
-    const [lapTime, setLapTime] = useState<number>(0);
+    const [lapTimer, setLapTimer] = useState<number>(0);
     const [savedLaps, setSavedLaps] = useState<number[]>([]);
     const intervalRef = useRef<number | null>(null);
     const startTimeRef = useRef<number>(0);
@@ -16,14 +16,14 @@ export default function App() {
         if(isRunning) {
             // Sets the start and lap ref to the current time
             startTimeRef.current = Date.now() - elapsedTime;
-            startLapTimeRef.current = Date.now() - lapTime;
+            startLapTimeRef.current = Date.now() - lapTimer;
 
             // Interval to update the elapsed time every 10 milliseconds
             intervalRef.current = window.setInterval(() => {
                 const currentTime = Date.now() - startTimeRef.current;
                 const currentLapTime = Date.now() - startLapTimeRef.current;
                 setElapsedTime(currentTime) // Updates the elapsed time
-                setLapTime(currentLapTime); // Updates the lap timer
+                setLapTimer(currentLapTime); // Updates the lap timer
             }, 10);
         }
 
@@ -50,15 +50,18 @@ export default function App() {
     
     const resetStopWatch = (): void => {
         setElapsedTime(0)
+        setLapTimer(0);
+        setSavedLaps([]);
+
+        // Reset the timer references to 0
         startTimeRef.current = 0;
+        startLapTimeRef.current = 0;
     }
     
     const saveLap = (): void => {
         if(isRunning) {
-            console.log('LAP')
             const lapElapsedTime = Date.now() - startLapTimeRef.current;
             setSavedLaps((prevLaps) => [lapElapsedTime, ...prevLaps]);
-            console.log(savedLaps)
             startLapTimeRef.current = Date.now(); // Reset lap timer after saving the previous lap in array
         }
     }
@@ -86,6 +89,7 @@ export default function App() {
             {savedLaps.length > 0 && (
                 <section>
                     <ul>
+                        <li className='lap-list'><span>Current Lap: </span><StopWatch elapsedTime={lapTimer} formatTime={formatTime} /></li>
                         {savedLaps.map((lapTime, index) => {
                             return <li key={index}>{`Lap ${savedLaps.length - index}: ${formatTime(lapTime)}`}</li>
                         })}
